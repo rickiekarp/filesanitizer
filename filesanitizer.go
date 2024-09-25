@@ -36,6 +36,13 @@ func convertFileName(oldFileName string) string {
 
 	newFileName = strings.ReplaceAll(newFileName, " "+extension, extension)
 	newFileName = strings.ReplaceAll(newFileName, "&", "-")
+	newFileName = strings.ReplaceAll(newFileName, "(", "")
+	newFileName = strings.ReplaceAll(newFileName, ")", "")
+	newFileName = strings.ReplaceAll(newFileName, ",", ".")
+	newFileName = strings.ReplaceAll(newFileName, "'", "")
+	newFileName = strings.ReplaceAll(newFileName, "!", "")
+	newFileName = strings.ReplaceAll(newFileName, "?", "")
+	newFileName = strings.ReplaceAll(newFileName, "__", "_")
 	newFileName = strings.ReplaceAll(newFileName, " ", "_")
 
 	return newFileName
