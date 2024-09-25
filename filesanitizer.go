@@ -51,9 +51,9 @@ func convertFileName(oldFileName string) string {
 	newFileName = strings.ReplaceAll(newFileName, "&", "-")
 	newFileName = strings.ReplaceAll(newFileName, ",", ".")
 	newFileName = strings.ReplaceAll(newFileName, "--", "-")
-	newFileName = strings.ReplaceAll(newFileName, "__", "_")
 	newFileName = strings.ReplaceAll(newFileName, "-_", "_")
-	newFileName = strings.ReplaceAll(newFileName, "._", ".")
+	newFileName = strings.ReplaceAll(newFileName, "._", "_")
+	newFileName = strings.ReplaceAll(newFileName, "__", "_")
 
 	return newFileName
 }
