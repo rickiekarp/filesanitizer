@@ -34,16 +34,26 @@ func convertFileName(oldFileName string) string {
 	newFileName := oldFileName
 	extension := filepath.Ext(newFileName)
 
-	newFileName = strings.ReplaceAll(newFileName, " "+extension, extension)
-	newFileName = strings.ReplaceAll(newFileName, "&", "-")
+	// trim
 	newFileName = strings.ReplaceAll(newFileName, "(", "")
 	newFileName = strings.ReplaceAll(newFileName, ")", "")
-	newFileName = strings.ReplaceAll(newFileName, ",", ".")
+	newFileName = strings.ReplaceAll(newFileName, "[", "")
+	newFileName = strings.ReplaceAll(newFileName, "]", "")
 	newFileName = strings.ReplaceAll(newFileName, "'", "")
 	newFileName = strings.ReplaceAll(newFileName, "!", "")
 	newFileName = strings.ReplaceAll(newFileName, "?", "")
-	newFileName = strings.ReplaceAll(newFileName, "__", "_")
+
+	// map
+	newFileName = strings.ReplaceAll(newFileName, "  ", "_")
 	newFileName = strings.ReplaceAll(newFileName, " ", "_")
+	newFileName = strings.ReplaceAll(newFileName, "_"+extension, extension)
+	newFileName = strings.ReplaceAll(newFileName, "."+extension, extension)
+	newFileName = strings.ReplaceAll(newFileName, "&", "-")
+	newFileName = strings.ReplaceAll(newFileName, ",", ".")
+	newFileName = strings.ReplaceAll(newFileName, "--", "-")
+	newFileName = strings.ReplaceAll(newFileName, "__", "_")
+	newFileName = strings.ReplaceAll(newFileName, "-_", "_")
+	newFileName = strings.ReplaceAll(newFileName, "._", ".")
 
 	return newFileName
 }

@@ -16,7 +16,7 @@ func TestSanitizeFilesInFolder(t *testing.T) {
 
 func TestConvertFileName(t *testing.T) {
 	t.Run("empty slice", func(t *testing.T) {
-		expected := "foo_-_bar.txt"
+		expected := "foo_bar.txt"
 		result := convertFileName("foo & ba)r..txt")
 
 		if expected != result {
