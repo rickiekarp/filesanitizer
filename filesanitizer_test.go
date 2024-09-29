@@ -9,7 +9,7 @@ func TestSanitizeFilesInFolder(t *testing.T) {
 		err := SanitizeFilesInFolder("./test")
 
 		if err != nil {
-			t.Fatalf(err.Error())
+			t.Fatal(err.Error())
 		}
 	})
 }

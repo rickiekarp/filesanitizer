@@ -4,8 +4,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
-	"github.com/sirupsen/logrus"
 )
 
 func SanitizeFilesInFolder(dirPath string) error {
@@ -21,7 +19,6 @@ func SanitizeFilesInFolder(dirPath string) error {
 
 		name := file.Name()
 		newFileName := convertFileName(name)
-		logrus.Debug("OLD: ", name, " - NEW: ", newFileName)
 
 		// rename the file
 		os.Rename(filepath.Join(dir, name), filepath.Join(dir, newFileName))
@@ -33,6 +30,8 @@ func SanitizeFilesInFolder(dirPath string) error {
 func convertFileName(oldFileName string) string {
 	newFileName := oldFileName
 	extension := filepath.Ext(newFileName)
+
+	newFileName = trimPrefixes(newFileName)
 
 	// trim
 	newFileName = strings.ReplaceAll(newFileName, "(", "")
@@ -46,6 +45,7 @@ func convertFileName(oldFileName string) string {
 	// map
 	newFileName = strings.ReplaceAll(newFileName, "&", "-")
 	newFileName = strings.ReplaceAll(newFileName, ",", ".")
+	newFileName = strings.ReplaceAll(newFileName, ";", ".")
 	newFileName = strings.ReplaceAll(newFileName, "_"+extension, extension)
 	newFileName = strings.ReplaceAll(newFileName, "."+extension, extension)
 	newFileName = strings.ReplaceAll(newFileName, "..", ".")
@@ -57,4 +57,10 @@ func convertFileName(oldFileName string) string {
 	newFileName = strings.ReplaceAll(newFileName, "__", "_")
 
 	return newFileName
+}
+
+func trimPrefixes(nameToTrim string) string {
+	nameToTrim = strings.TrimPrefix(nameToTrim, "-")
+	nameToTrim = strings.TrimPrefix(nameToTrim, "_")
+	return nameToTrim
 }
