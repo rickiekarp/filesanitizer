@@ -9,11 +9,6 @@ BINARY_NAME=filesanitizer
 test:
 	$(GOTEST) -v ./...
 
-check-tag:
-ifndef TAG
-	$(error TAG is undefined. Add TAG=v0.0.1 argument)
-endif
-
-release: check-tag
-	git tag $(TAG)
+releaseTag:
+	git tag v$(shell date +1.%y%j.$(shell date -d "1970-01-01 UTC $(shell date +%T)" +%s))
 	git push --tags
